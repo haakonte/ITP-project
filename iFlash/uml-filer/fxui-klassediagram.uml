@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="630.0">flashcard.ui.ImageHandling</node>
+    <node x="406.0" y="630.0">flashcard.ui.App</node>
+    <node x="665.0" y="630.0">flashcard.ui.FlashcardLoader</node>
+    <node x="716.0" y="0.0">flashcard.ui.MainMenuController</node>
+    <node x="362.0" y="0.0">flashcard.ui.CategoryController</node>
+    <node x="0.0" y="0.0">flashcard.ui.EditController</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="0.5672514619883041" x="542.3659793814433" y="459.50515463917526" />
+  <SelectedNodes>
+    <node>flashcard.ui.MainMenuController</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

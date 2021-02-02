@@ -1,0 +1,39 @@
+@startuml
+package core.flashcard.core <<rectangle>> {
+    abstract class Flashcard
+    class Category
+}
+package restapi.com.restapi <<rectangle>> {
+    class CategoryController
+    class RestapiApplication
+
+}
+package fxui.flashcard.ui <<rectangle>> {
+    class App
+    class FlashcardLoader
+    class MainMenuController
+    class CategoryController
+    class EditController
+    class GameController
+    class WebClientCategoryClient
+
+}
+package server.flashcard.server <<rectangle>> {
+    class FirestoreInitializer
+    class FirestoreService
+
+}
+
+
+
+Category "1" *-- "*" Flashcard
+
+restapi.com.restapi --> fxui.flashcard.ui
+fxui.flashcard.ui --> core.flashcard.core
+restapi.com.restapi --> server.flashcard.server
+server.flashcard.server --> core.flashcard.core
+restapi.com.restapi --> core.flashcard.core
+
+
+
+@enduml

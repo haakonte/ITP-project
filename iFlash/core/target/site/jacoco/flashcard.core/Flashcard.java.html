@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="nb"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Flashcard.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core</a> &gt; <a href="index.source.html" class="el_package">flashcard.core</a> &gt; <span class="el_source">Flashcard.java</span></div><h1>Flashcard.java</h1><pre class="source lang-java linenums">package flashcard.core;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+/**
+ * Opprinnelig hadde vi en abstrakt superklasse for flashcards men vi så
+ * det mer hensiktsmessig å ha en enkel klasse som var kun for tekststrenger.
+ * Dette gjorde vi fordi vi fjernet kravet om et flashcard med bilde.
+ * Flashcard klasse for to tekststrenger.
+ * I denne klassen er det enkle metoder som gettere, settere, toString og konstruktør.
+ */
+@JsonDeserialize(as = Flashcard.class)
+public class Flashcard {
+
+  private String text1;
+  private String text2;
+
+  /**
+   * Konstruktør som oppretter flashcard.
+   * @param text1 - ene siden av flashcarden
+   * @param text2 - andre siden av flashcarden
+   */
+<span class="fc" id="L23">  public Flashcard(String text1, String text2) {</span>
+<span class="fc" id="L24">    this.text1 = text1;</span>
+<span class="fc" id="L25">    this.text2 = text2;</span>
+<span class="fc" id="L26">  }</span>
+
+  public String getText1() {
+<span class="fc" id="L29">    return text1;</span>
+  }
+
+  public String getText2() {
+<span class="fc" id="L33">    return text2;</span>
+  }
+
+  public void setText1(String text1) {
+<span class="fc" id="L37">    this.text1 = text1;</span>
+<span class="fc" id="L38">  }</span>
+
+  public void setText2(String text2) {
+<span class="fc" id="L41">    this.text2 = text2;</span>
+<span class="fc" id="L42">  }</span>
+
+  @Override
+  public String toString() {
+<span class="fc" id="L46">    return &quot;FlashCard{ text1=&quot; + this.text1</span>
+            + &quot;, text2=&quot; + this.text2 + '}';
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

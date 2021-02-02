@@ -1,0 +1,8 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+fxui,flashcard.ui,WebClientCategoryClient,189,32,0,0,56,11,5,3,5,3
+fxui,flashcard.ui,CategoryController,104,341,13,27,31,77,15,28,4,19
+fxui,flashcard.ui,GameController,49,156,5,9,13,43,6,12,1,10
+fxui,flashcard.ui,MainMenuController,25,128,1,1,10,41,1,11,0,11
+fxui,flashcard.ui,App,49,0,0,0,17,0,4,0,4,0
+fxui,flashcard.ui,FlashcardLoader,36,310,7,7,10,67,6,10,0,9
+fxui,flashcard.ui,EditController,89,481,9,33,26,127,11,38,3,25

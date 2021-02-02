@@ -1,0 +1,7 @@
+flashcard/ui/FlashcardLoader.class
+flashcard/ui/App.class
+flashcard/ui/CategoryController.class
+flashcard/ui/WebClientCategoryClient.class
+flashcard/ui/MainMenuController.class
+flashcard/ui/EditController.class
+flashcard/ui/GameController.class

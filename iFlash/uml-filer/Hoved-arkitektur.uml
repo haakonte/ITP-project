@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="516.2043417366947" y="230.0">flashcard.ui.App</node>
+    <node x="609.2043417366947" y="330.0">flashcard.ui.GameController</node>
+    <node x="1057.3254901960784" y="230.0">flashcard.server.FirestoreService</node>
+    <node x="429.45434173669463" y="0.0">flashcard.core.Flashcard</node>
+    <node x="828.3254901960784" y="230.0">flashcard.server.FirestoreInitializer</node>
+    <node x="789.2043417366947" y="330.0">com.restapi.RestapiApplication</node>
+    <node x="0.0" y="420.0">flashcard.ui.FlashcardLoader</node>
+    <node x="457.17114845938374" y="420.0">flashcard.ui.MainMenuController</node>
+    <node x="199.24785247432305" y="420.0">flashcard.ui.CategoryController</node>
+    <node x="990.5" y="420.0">com.restapi.CategoryController</node>
+    <node x="264.20434173669463" y="230.0">flashcard.ui.WebClientCategoryClient</node>
+    <node x="433.45434173669463" y="110.0">flashcard.core.Category</node>
+    <node x="49.632913165266075" y="330.0">flashcard.ui.EditController</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="flashcard.ui.FlashcardLoader" target="flashcard.ui.EditController">
+      <point x="-14.0" y="-15.0" />
+      <point x="70.0" y="400.0" />
+      <point x="65.63291316526607" y="400.0" />
+      <point x="-64.0" y="15.0" />
+    </edge>
+    <edge source="flashcard.server.FirestoreService" target="flashcard.core.Category">
+      <point x="-66.0" y="-15.0" />
+      <point x="1079.3254901960784" y="170.0" />
+      <point x="531.4543417366947" y="170.0" />
+      <point x="42.0" y="15.0" />
+    </edge>
+    <edge source="com.restapi.CategoryController" target="flashcard.core.Category">
+      <point x="-24.0" y="-15.0" />
+      <point x="1062.5" y="400.0" />
+      <point x="1046.8254901960784" y="400.0" />
+      <point x="1046.8254901960784" y="180.0" />
+      <point x="522.1210084033614" y="180.0" />
+      <point x="32.66666666666674" y="15.0" />
+    </edge>
+    <edge source="flashcard.ui.EditController" target="flashcard.core.Category">
+      <point x="-22.857142857142833" y="-15.0" />
+      <point x="106.77577030812324" y="300.0" />
+      <point x="86.04547152194215" y="300.0" />
+      <point x="86.04547152194215" y="160.0" />
+      <point x="438.1210084033613" y="160.0" />
+      <point x="-51.333333333333314" y="15.0" />
+    </edge>
+    <edge source="flashcard.ui.CategoryController" target="flashcard.ui.App">
+      <point x="82.28571428571428" y="-15.0" />
+      <point x="377.53356676003733" y="400.0" />
+      <point x="489.49906629318383" y="400.0" />
+      <point x="489.49906629318383" y="310.0" />
+      <point x="537.8043417366946" y="310.0" />
+      <point x="-14.399999999999977" y="15.0" />
+    </edge>
+    <edge source="com.restapi.CategoryController" target="flashcard.server.FirestoreService">
+      <point x="72.0" y="-15.0" />
+      <point x="1158.5" y="400.0" />
+      <point x="1143.25" y="400.0" />
+      <point x="1143.25" y="310.0" />
+      <point x="1189.3254901960784" y="310.0" />
+      <point x="44.0" y="15.0" />
+    </edge>
+    <edge source="flashcard.ui.GameController" target="flashcard.ui.App">
+      <point x="-64.0" y="-15.0" />
+      <point x="625.2043417366947" y="310.0" />
+      <point x="566.6043417366946" y="310.0" />
+      <point x="14.399999999999977" y="15.0" />
+    </edge>
+    <edge source="flashcard.ui.EditController" target="flashcard.ui.WebClientCategoryClient">
+      <point x="22.85714285714289" y="-15.0" />
+      <point x="152.49005602240896" y="280.0" />
+      <point x="283.53767507002794" y="280.0" />
+      <point x="-96.66666666666666" y="15.0" />
+    </edge>
+    <edge source="flashcard.ui.GameController" target="flashcard.core.Flashcard">
+      <point x="32.0" y="-15.0" />
+      <point x="721.2043417366947" y="310.0" />
+      <point x="728.75" y="310.0" />
+      <point x="728.75" y="80.0" />
+      <point x="507.45434173669463" y="80.0" />
+      <point x="18.0" y="15.0" />
+    </edge>
+    <edge source="flashcard.ui.EditController" target="flashcard.ui.App">
+      <point x="68.57142857142856" y="-15.0" />
+      <point x="198.20434173669463" y="300.0" />
+      <point x="523.4043417366947" y="300.0" />
+      <point x="-28.799999999999955" y="15.0" />
+    </edge>
+    <edge source="flashcard.server.FirestoreService" target="flashcard.core.Flashcard">
+      <point x="22.0" y="-15.0" />
+      <point x="1167.3254901960784" y="210.0" />
+      <point x="1168.7043417366947" y="210.0" />
+      <point x="1168.7043417366947" y="60.0" />
+      <point x="531.4543417366947" y="60.0" />
+      <point x="42.0" y="15.0" />
+    </edge>
+    <edge source="flashcard.core.Category" target="flashcard.core.Flashcard">
+      <point x="-28.0" y="-15.0" />
+      <point x="461.45434173669463" y="90.0" />
+      <point x="483.45434173669463" y="90.0" />
+      <point x="-6.0" y="15.0" />
+    </edge>
+    <edge source="flashcard.ui.CategoryController" target="flashcard.ui.WebClientCategoryClient">
+      <point x="54.85714285714283" y="-15.0" />
+      <point x="350.1049953314659" y="390.0" />
+      <point x="396.98594771241835" y="390.0" />
+      <point x="396.98594771241835" y="290.0" />
+      <point x="399.537675070028" y="290.0" />
+      <point x="19.33333333333337" y="15.0" />
+    </edge>
+    <edge source="flashcard.ui.GameController" target="flashcard.core.Category">
+      <point x="-32.0" y="-15.0" />
+      <point x="657.2043417366947" y="310.0" />
+      <point x="662.8254901960784" y="310.0" />
+      <point x="662.8254901960784" y="200.0" />
+      <point x="503.45434173669463" y="200.0" />
+      <point x="14.0" y="15.0" />
+    </edge>
+    <edge source="flashcard.ui.EditController" target="flashcard.ui.FlashcardLoader">
+      <point x="0.0" y="15.0" />
+      <point x="129.63291316526607" y="400.0" />
+      <point x="126.0" y="400.0" />
+      <point x="42.0" y="-15.0" />
+    </edge>
+    <edge source="flashcard.ui.MainMenuController" target="flashcard.ui.App">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.restapi.CategoryController" target="com.restapi.RestapiApplication">
+      <point x="-72.0" y="-15.0" />
+      <point x="1014.5" y="400.0" />
+      <point x="885.2043417366947" y="400.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="flashcard.ui.FlashcardLoader" target="flashcard.core.Flashcard">
+      <point x="-42.0" y="-15.0" />
+      <point x="42.0" y="400.0" />
+      <point x="39.132913165266075" y="400.0" />
+      <point x="39.132913165266075" y="60.0" />
+      <point x="447.45434173669463" y="60.0" />
+      <point x="-42.0" y="15.0" />
+    </edge>
+    <edge source="flashcard.ui.CategoryController" target="flashcard.core.Category">
+      <point x="-27.428571428571445" y="-15.0" />
+      <point x="267.8192810457516" y="390.0" />
+      <point x="231.49999999999997" y="390.0" />
+      <point x="231.49999999999997" y="190.0" />
+      <point x="466.12100840336126" y="190.0" />
+      <point x="-23.33333333333337" y="15.0" />
+    </edge>
+    <edge source="flashcard.ui.MainMenuController" target="flashcard.ui.WebClientCategoryClient">
+      <point x="-38.39999999999998" y="-15.0" />
+      <point x="514.7711484593838" y="380.0" />
+      <point x="449.9373949579831" y="380.0" />
+      <point x="449.9373949579831" y="290.0" />
+      <point x="476.87100840336126" y="290.0" />
+      <point x="96.66666666666663" y="15.0" />
+    </edge>
+    <edge source="flashcard.ui.CategoryController" target="flashcard.ui.EditController">
+      <point x="-82.28571428571428" y="-15.0" />
+      <point x="212.96213818860878" y="400.0" />
+      <point x="193.63291316526607" y="400.0" />
+      <point x="64.0" y="15.0" />
+    </edge>
+    <edge source="flashcard.ui.MainMenuController" target="flashcard.core.Category">
+      <point x="38.39999999999998" y="-15.0" />
+      <point x="591.5711484593837" y="400.0" />
+      <point x="598.7043417366947" y="400.0" />
+      <point x="598.7043417366947" y="210.0" />
+      <point x="494.12100840336126" y="210.0" />
+      <point x="4.666666666666629" y="15.0" />
+    </edge>
+    <edge source="com.restapi.RestapiApplication" target="flashcard.ui.App">
+      <point x="-64.0" y="-15.0" />
+      <point x="821.2043417366947" y="300.0" />
+      <point x="581.0043417366946" y="300.0" />
+      <point x="28.799999999999955" y="15.0" />
+    </edge>
+    <edge source="com.restapi.RestapiApplication" target="flashcard.server.FirestoreInitializer">
+      <point x="0.0" y="-15.0" />
+      <point x="885.2043417366947" y="310.0" />
+      <point x="880.3254901960784" y="310.0" />
+      <point x="-52.0" y="15.0" />
+    </edge>
+    <edge source="flashcard.ui.WebClientCategoryClient" target="flashcard.core.Category">
+      <point x="0.0" y="-15.0" />
+      <point x="380.20434173669463" y="210.0" />
+      <point x="484.787675070028" y="210.0" />
+      <point x="-4.666666666666629" y="15.0" />
+    </edge>
+    <edge source="flashcard.ui.EditController" target="flashcard.core.Flashcard">
+      <point x="-45.714285714285666" y="-15.0" />
+      <point x="83.91862745098041" y="310.0" />
+      <point x="72.96213818860883" y="310.0" />
+      <point x="72.96213818860883" y="80.0" />
+      <point x="471.45434173669463" y="80.0" />
+      <point x="-18.0" y="15.0" />
+    </edge>
+    <edge source="flashcard.ui.MainMenuController" target="flashcard.ui.GameController">
+      <point x="76.79999999999995" y="-15.0" />
+      <point x="629.9711484593837" y="400.0" />
+      <point x="689.2043417366947" y="400.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.532695374800638" x="617.0" y="225.0" />
+  <SelectedNodes>
+    <node>flashcard.server.FirestoreService</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

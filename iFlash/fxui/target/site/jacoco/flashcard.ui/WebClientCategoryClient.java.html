@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="nb"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WebClientCategoryClient.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fxui</a> &gt; <a href="index.source.html" class="el_package">flashcard.ui</a> &gt; <span class="el_source">WebClientCategoryClient.java</span></div><h1>WebClientCategoryClient.java</h1><pre class="source lang-java linenums">package flashcard.ui;
+
+import com.google.gson.Gson;
+import flashcard.core.Category;
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.List;
+import org.codehaus.httpcache4j.uri.QueryParam;
+import org.codehaus.httpcache4j.uri.URIBuilder;
+
+
+
+<span class="fc" id="L16">public class WebClientCategoryClient {</span>
+
+<span class="fc" id="L18">  private static final Gson gson = new Gson();</span>
+<span class="fc" id="L19">  private static final URI uri = URI.create(&quot;http://localhost:8080/&quot;);</span>
+
+  /**
+   * Retrieves a category object from the database.
+   * @param name - name of the category we want to retrieve
+   * @return - Category object matching the name
+   * @throws IOException - If the connection fails or the category doesn't exist
+   * @throws InterruptedException - If the connection is interrupted
+   */
+  public Category getCategory(String name) throws IOException, InterruptedException {
+<span class="nc" id="L29">    URIBuilder uriBuilder = URIBuilder.fromURI(uri);</span>
+<span class="nc" id="L30">    URI uri1 = uriBuilder.addPath(&quot;getCategory&quot;)</span>
+<span class="nc" id="L31">            .addParameter(new QueryParam(&quot;name&quot;, name))</span>
+<span class="nc" id="L32">            .toURI();</span>
+<span class="nc" id="L33">    HttpRequest request = HttpRequest.newBuilder(uri1)</span>
+<span class="nc" id="L34">            .GET()</span>
+<span class="nc" id="L35">            .build();</span>
+<span class="nc" id="L36">    HttpResponse&lt;String&gt; response = HttpClient.newBuilder()</span>
+<span class="nc" id="L37">            .build()</span>
+<span class="nc" id="L38">            .send(request, HttpResponse.BodyHandlers.ofString());</span>
+<span class="nc" id="L39">    return gson.fromJson(response.body(), Category.class);</span>
+  }
+
+  /**
+   * Creates a new category document in the database.
+   * @param category - The new category to be stored in the database
+   * @throws IOException - If the connection fails
+   * @throws InterruptedException - If the connection is interrupted
+   */
+  public void createCategory(Category category) throws IOException, InterruptedException {
+<span class="nc" id="L49">    URIBuilder uriBuilder = URIBuilder.fromURI(uri);</span>
+<span class="nc" id="L50">    URI uri1 = uriBuilder.addPath(&quot;createCategory&quot;)</span>
+<span class="nc" id="L51">            .addParameter(new QueryParam(&quot;category&quot;, gson.toJson(category)))</span>
+<span class="nc" id="L52">            .toURI();</span>
+<span class="nc" id="L53">    HttpRequest request = HttpRequest.newBuilder(uri1)</span>
+<span class="nc" id="L54">            .POST(HttpRequest.BodyPublishers.noBody())</span>
+<span class="nc" id="L55">            .build();</span>
+<span class="nc" id="L56">    HttpClient.newBuilder()</span>
+<span class="nc" id="L57">            .build()</span>
+<span class="nc" id="L58">            .send(request, HttpResponse.BodyHandlers.ofString());</span>
+<span class="nc" id="L59">  }</span>
+
+  /**
+   * Deletes a category stored in the database.
+   * @param categoryName - Name of category to be deleted
+   * @throws IOException - If connection fails or category doesn't exist
+   * @throws InterruptedException - If connection is interrupted
+   */
+  public void deleteCategory(String categoryName) throws IOException, InterruptedException {
+<span class="nc" id="L68">    URIBuilder uriBuilder = URIBuilder.fromURI(uri);</span>
+<span class="nc" id="L69">    URI uri1 = uriBuilder.addPath(&quot;deleteCategory&quot;)</span>
+<span class="nc" id="L70">            .addParameter(new QueryParam(&quot;name&quot;, categoryName))</span>
+<span class="nc" id="L71">            .toURI();</span>
+<span class="nc" id="L72">    HttpRequest request = HttpRequest.newBuilder(uri1)</span>
+<span class="nc" id="L73">            .DELETE()</span>
+<span class="nc" id="L74">            .build();</span>
+<span class="nc" id="L75">    HttpClient.newBuilder()</span>
+<span class="nc" id="L76">            .build()</span>
+<span class="nc" id="L77">            .send(request, HttpResponse.BodyHandlers.ofString());</span>
+<span class="nc" id="L78">  }</span>
+
+  /**
+   * Returns a list of Strings containing all the names of categories stored in the database.
+   * @return - A list of Strings matching the category names
+   * @throws IOException - If connection fails
+   * @throws InterruptedException - If connection is interrupted
+   */
+  public List&lt;String&gt; getCategories() throws IOException, InterruptedException {
+<span class="fc" id="L87">    URIBuilder uriBuilder = URIBuilder.fromURI(uri);</span>
+<span class="fc" id="L88">    URI uri1 = uriBuilder.addPath(&quot;getCategories&quot;)</span>
+<span class="fc" id="L89">            .toURI();</span>
+<span class="fc" id="L90">    HttpRequest request = HttpRequest.newBuilder(uri1)</span>
+<span class="fc" id="L91">            .GET()</span>
+<span class="fc" id="L92">            .build();</span>
+<span class="fc" id="L93">    HttpResponse&lt;String&gt; response = HttpClient.newBuilder()</span>
+<span class="fc" id="L94">            .build()</span>
+<span class="nc" id="L95">            .send(request, HttpResponse.BodyHandlers.ofString());</span>
+<span class="nc" id="L96">    return gson.fromJson(response.body(), List.class);</span>
+  }
+
+  /**
+   * Updates the name of a Category stored in the database.
+   * @param oldName - Current name of the category to be updated
+   * @param newName - The new name we want to update the Category with
+   * @return int - Returns an integer corresponding to a Http-status code
+   * @throws IOException - If the category doesn't exist or the connection to localhost fails
+   * @throws InterruptedException - If the connection to localhost or the server is interrupted
+   */
+  public int updateCategoryName(String oldName, String newName)
+          throws IOException, InterruptedException {
+<span class="nc" id="L109">    URIBuilder uriBuilder = URIBuilder.fromURI(uri);</span>
+<span class="nc" id="L110">    URI uri1 = uriBuilder.addPath(&quot;updateCategoryName&quot;)</span>
+<span class="nc" id="L111">            .addPath(oldName)</span>
+<span class="nc" id="L112">            .addParameter(new QueryParam(&quot;newName&quot;, newName))</span>
+<span class="nc" id="L113">            .toURI();</span>
+<span class="nc" id="L114">    HttpRequest request = HttpRequest.newBuilder(uri1)</span>
+<span class="nc" id="L115">            .PUT(HttpRequest.BodyPublishers.noBody())</span>
+<span class="nc" id="L116">            .build();</span>
+    HttpResponse&lt;String&gt; response =
+<span class="nc" id="L118">            HttpClient.newBuilder()</span>
+<span class="nc" id="L119">                    .build()</span>
+<span class="nc" id="L120">                    .send(request, HttpResponse.BodyHandlers.ofString());</span>
+<span class="nc" id="L121">    return response.statusCode();</span>
+  }
+
+  /**
+   * Updates a category object stored in the database.
+   * @param category - Category that is to be updated
+   * @throws IOException - If the category doesn't exist or the connection to localhost fails
+   * @throws InterruptedException - If the connection to localhost or the server is interrupted
+   */
+  public void updateCategory(Category category) throws IOException, InterruptedException {
+<span class="nc" id="L131">    URIBuilder uriBuilder = URIBuilder.fromURI(uri);</span>
+<span class="nc" id="L132">    URI uri1 = uriBuilder.addPath(&quot;updateCategory&quot;)</span>
+<span class="nc" id="L133">            .addParameter(new QueryParam(&quot;category&quot;, gson.toJson(category)))</span>
+<span class="nc" id="L134">            .toURI();</span>
+<span class="nc" id="L135">    HttpRequest request = HttpRequest.newBuilder(uri1)</span>
+<span class="nc" id="L136">            .PUT(HttpRequest.BodyPublishers.noBody())</span>
+<span class="nc" id="L137">            .build();</span>
+<span class="nc" id="L138">    HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());</span>
+<span class="nc" id="L139">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

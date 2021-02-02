@@ -1,0 +1,15 @@
+@startuml
+
+UserInterface --> MainMenuController: Empty ComboBox
+MainMenuController -> WebClientCategoryClient: getCategories()
+WebClientCategoryClient --> CategoryController: HTTP get request on localhost port 8080 path:"/getCategories"
+CategoryController -> FirestoreService: getCategories()
+FirestoreService --> Cloud_Server: Request for names of stored categories.
+
+FirestoreService <-- Cloud_Server: Names of stored categories.
+CategoryController <- FirestoreService: List<String> categoryNames
+WebClientCategoryClient <-- CategoryController: HTTP response on localhost port 8080 containg list of category names
+MainMenuController <- WebClientCategoryClient: List<String> categoryNames
+UserInterface <-- MainMenuController: Populates ComboBox with category names.
+
+@enduml

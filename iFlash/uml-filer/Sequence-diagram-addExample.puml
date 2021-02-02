@@ -1,0 +1,12 @@
+@startuml
+User --> Category.fxml: Add "ExampleCategory"
+Category.fxml --> CategoryController: handleCreateCategory()
+Category.fxml <-- CategoryController: categoryName.getText()
+Category.fxml --> CategoryController: "ExampleCategory"
+CategoryController -> Category: new Category("ExampleCategory")
+CategoryController <- Category: Category
+CategoryController -> WebClientCategoryClient: createCategory(Category)
+CategoryController -> WebClientCategoryClient: getCategories()
+CategoryController <- WebClientCategoryClient: List<String>
+Category.fxml <-- CategoryController: Fills ComboBox with updated categorynames
+@enduml

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="flashcard.ui.GameController">
+      <Pane layoutX="200.0" layoutY="82.0" prefHeight="263.0" prefWidth="200.0" style="-fx-background-color: #0780ED; -fx-background-radius: 5pt;">
+         <effect>
+            <DropShadow />
+         </effect>
+            <Button fx:id="flipButton" alignment="CENTER" contentDisplay="CENTER" layoutX="81.0" layoutY="204.0" mnemonicParsing="false" onAction="#handleFlipCard" style="-fx-alignment: center; -fx-background-color: #7171FF;" text="Flip">
+               <effect>
+                  <Blend mode="ADD" />
+               </effect>
+               <font>
+                  <Font name="Helvetica" size="13.0" />
+               </font>
+            </Button>
+            <Label fx:id="flashCardText" alignment="CENTER" layoutX="4.0" layoutY="5.0" prefHeight="170.0" prefWidth="191.0" style="-fx-wrap-text: true; -fx-alignment: center; -fx-text-alignment: center; -fx-border-style: solid; -fx-border-radius: 5pt; -fx-border-width: 0.2pt; -fx-background-color: #FFFFFF; -fx-background-radius: 5pt;" text="Yo ajksdnfaihsdbvfiuasdbfijasdbchabsdcjaksbdncujalnsdcfa" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Helvetica Neue" size="13.0" />
+               </font>
+            </Label>
+      </Pane>
+      <Button layoutX="27.0" layoutY="26.0" mnemonicParsing="false" onAction="#handleHomeScreen" style="-fx-background-color: #EFEFEF;" text="Home">
+         <font>
+            <Font name="Helvetica" size="13.0" />
+         </font>
+         <effect>
+            <InnerShadow height="10.0" radius="4.5" width="10.0" />
+         </effect>
+      </Button>
+      <Button fx:id="nextButton" layoutX="507.0" layoutY="345.0" mnemonicParsing="false" onAction="#handleNextCard" style="-fx-background-color: #81FF81;" text="Next" textAlignment="CENTER">
+         <font>
+            <Font name="Helvetica Neue" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="previousButton" layoutX="25.0" layoutY="345.0" mnemonicParsing="false" onAction="#handlePreviousCard" style="-fx-background-color: #81FF81 #81FF81;" text="Previous" textAlignment="CENTER">
+         <font>
+            <Font name="Helvetica" size="13.0" />
+         </font>
+      </Button>
+      <Label fx:id="categoryName" alignment="CENTER" layoutX="88.0" layoutY="20.0" prefHeight="39.0" prefWidth="424.0" style="-fx-wrap-text: true;" text="Category name" textAlignment="CENTER">
+         <font>
+            <Font name="Helvetica Neue" size="32.0" />
+         </font>
+      </Label>
+</AnchorPane>

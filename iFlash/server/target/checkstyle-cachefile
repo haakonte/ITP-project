@@ -1,0 +1,7 @@
+#Fri Nov 20 14:29:23 CET 2020
+configuration*?=7297DF3100448C46C3322FD3CAE90A2EDBE618D5
+module-resource*?\:checkstyle-xpath-suppressions.xml=473E2A240F5EDEA42E9B07575FF34A909618E3F7
+module-resource*?\:checkstyle-suppressions.xml=23BBB1B921FB9444D380D5EE1EDB5C2175911A72
+/Users/hakon/IT1901/gr2019/iFlash/server/src/main/java/flashcard/server/FirestoreService.java=1605876689523
+/Users/hakon/IT1901/gr2019/iFlash/server/src/main/java/flashcard/server/FirestoreInitializer.java=1605647284950
+/Users/hakon/IT1901/gr2019/iFlash/server/src/test/java/flashcard/server/ServerTest.java=1605878619637

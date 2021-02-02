@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="nb"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CategoryController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fxui</a> &gt; <a href="index.source.html" class="el_package">flashcard.ui</a> &gt; <span class="el_source">CategoryController.java</span></div><h1>CategoryController.java</h1><pre class="source lang-java linenums">package flashcard.ui;
+
+import flashcard.core.Category;
+import java.io.IOException;
+import java.util.List;
+import javafx.beans.binding.Bindings;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+/**
+ * Kontroller for kategori vinduet i applikasjonen vår.
+ * Datastrukturene som tas inn i denne klassen,
+ * er et MainMenu objekt, som har en liste med Categories,
+ * der man når man kommer fra MainMenu og laster inn et Category objekt,
+ * som er hoved kilde for datahåndtering i denne kontrolleren.
+ */
+
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">public class CategoryController {</span>
+
+<span class="fc" id="L29">  private WebClientCategoryClient categoryClient = new WebClientCategoryClient();</span>
+  private Category category;
+
+  @FXML
+  private TextField categoryName;
+
+  @FXML
+  private Label feedback;
+
+  @FXML
+  private Button createCategory;
+
+  @FXML
+  private ComboBox&lt;String&gt; categories;
+
+  @FXML
+  private Button deleteSelection;
+
+  @FXML
+  private Button editSelection;
+
+  private Stage primaryStage;
+
+
+  /**
+   * Setter opp FXML-elementer.
+   * Fyller opp kombobox.
+   * Setter opp lytter for categoryName feltet, for validering
+   */
+  @FXML
+  public void initialize() {
+<span class="fc" id="L60">    List&lt;String&gt; categoryList = loadCategories();</span>
+<span class="fc" id="L61">    categoryNameListener(categoryName);</span>
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">    if (categoryList != null) {</span>
+<span class="nc" id="L63">      categories.getItems().addAll(categoryList);</span>
+    }
+<span class="fc" id="L65">    setUpButtonListeners();</span>
+<span class="fc" id="L66">    categories.setPromptText(&quot;Choose category&quot;);</span>
+<span class="fc" id="L67">  }</span>
+
+  private void setUpButtonListeners() {
+<span class="fc" id="L70">    createCategory.disableProperty().bind(Bindings.createBooleanBinding(() -&gt;</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">                    categoryName.getText() == null</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">                            || categories.getItems().contains(categoryName.getText())</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">                            || categoryName.getText().length() &gt; 30</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">                            || categoryName.getText().length() &lt; 2</span>
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">                            || !categoryName.getText().matches(&quot;.*\\w.*&quot;),</span>
+<span class="fc" id="L76">            categoryName.textProperty()));</span>
+
+<span class="fc" id="L78">    editSelection.disableProperty().bind(Bindings.createBooleanBinding(() -&gt;</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">                    categories.getSelectionModel().getSelectedItem() == null,</span>
+<span class="fc" id="L80">            categories.getSelectionModel().selectedItemProperty()));</span>
+
+<span class="fc" id="L82">    deleteSelection.disableProperty().bind(Bindings.createBooleanBinding(() -&gt;</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">                    categories.getSelectionModel().getSelectedItem() == null,</span>
+<span class="fc" id="L84">            categories.getSelectionModel().selectedItemProperty()));</span>
+<span class="fc" id="L85">  }</span>
+
+
+  /**
+   * Velger en category fra comboboxen.
+   */
+
+  @FXML
+  public void handleSelectCategory() {
+<span class="fc" id="L94">    String categoryName = categories.getValue();</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">    if (categoryName != null) {</span>
+      try {
+<span class="fc" id="L97">        this.category = categoryClient.getCategory(categoryName);</span>
+<span class="nc" id="L98">      } catch (IOException | InterruptedException e) {</span>
+<span class="nc" id="L99">        setFeedback(&quot;Could not select the category&quot;, &quot;red&quot;);</span>
+<span class="fc" id="L100">      }</span>
+    }
+<span class="fc" id="L102">  }</span>
+
+  /**
+   * Hjelpemetode som får delegert lytting av tekstfelt.
+   * Håndterer validering og passer på at man ikke kan lage
+   * kategorier med altfor langt navn
+   * @param field - tekstfelt som vi lytter på
+   */
+  private void categoryNameListener(TextField field) {
+<span class="fc" id="L111">    field.textProperty().addListener((observable, oldValue, newValue) -&gt; {</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">      if (newValue == null) {</span>
+<span class="fc" id="L113">        return;</span>
+      }
+<span class="pc bpc" id="L115" title="1 of 4 branches missed.">      if (newValue.length() &gt; 30 || newValue.length() &lt; 2</span>
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">              || !categoryName.getText().matches(&quot;.*\\w.*&quot;)) {</span>
+<span class="fc" id="L117">        feedback.setText(&quot;Category name must be between 2 and 30 characters&quot;);</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">      } else if (categories.getItems().contains(newValue)) {</span>
+<span class="fc" id="L119">        feedback.setText(&quot;Category &quot; + newValue + &quot; already exists&quot;);</span>
+      } else {
+<span class="fc" id="L121">        feedback.setText(null);</span>
+      }
+<span class="fc" id="L123">    });</span>
+<span class="fc" id="L124">  }</span>
+
+  /**
+   * Oppretter en ny kategori og legger den til i comboboxen.
+   */
+  @FXML
+  public void handleCreateCategory() {
+<span class="fc" id="L131">    Category newCategory = new Category(categoryName.getText());</span>
+    try {
+<span class="fc" id="L133">      categoryClient.createCategory(newCategory);</span>
+<span class="fc" id="L134">      categories.getItems().add(newCategory.getName());</span>
+<span class="fc" id="L135">      categoryName.setText(null);</span>
+<span class="fc" id="L136">      categories.getSelectionModel().selectLast();</span>
+<span class="nc" id="L137">    } catch (IOException | InterruptedException e) {</span>
+<span class="nc" id="L138">      setFeedback(&quot;Could not create the category&quot;, &quot;red&quot;);</span>
+<span class="fc" id="L139">    }</span>
+<span class="fc" id="L140">  }</span>
+
+
+  /**
+   * Sletter den valgte kategorien.
+   */
+  @FXML
+  public void handleDeleteSelected() {
+<span class="fc" id="L148">    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, &quot;Do you wish to delete &quot;</span>
+<span class="fc" id="L149">            + categories.getSelectionModel().getSelectedItem() + &quot; ?&quot;,</span>
+            ButtonType.YES, ButtonType.NO);
+<span class="fc" id="L151">    alert.showAndWait();</span>
+<span class="pc bpc" id="L152" title="1 of 2 branches missed.">    if (alert.getResult() == ButtonType.YES) {</span>
+<span class="fc" id="L153">      String categoryName = categories.getValue();</span>
+      try {
+<span class="fc" id="L155">        categoryClient.deleteCategory(categoryName);</span>
+<span class="fc" id="L156">        categories.getItems().remove(categoryName);</span>
+<span class="fc" id="L157">        categories.getSelectionModel().selectFirst();</span>
+<span class="nc" id="L158">      } catch (IOException | InterruptedException e) {</span>
+<span class="nc" id="L159">        setFeedback(&quot;Could not delete the selected category&quot;, &quot;red&quot;);</span>
+<span class="fc" id="L160">      }</span>
+
+    }
+<span class="fc" id="L163">  }</span>
+
+  /**
+   * En viktig hjelpemetode som er primær-kilden til henting og setting av data.
+   * Her henter vi et mainMenu objekt som er den overordnede datastrukturen som inneholder en
+   * kolleksjon av Category-objekter
+   */
+  private List&lt;String&gt; loadCategories() {
+    List&lt;String&gt; categories;
+    try {
+<span class="nc" id="L173">      categories = categoryClient.getCategories();</span>
+<span class="fc" id="L174">    } catch (IOException | InterruptedException e) {</span>
+<span class="fc" id="L175">      categories = null;</span>
+<span class="nc" id="L176">    }</span>
+<span class="fc" id="L177">    return categories;</span>
+  }
+
+  /**
+   * Denne metoden tar for seg endring av vindu til vinduet der man redigererer en enkelt kategori.
+   * Den fungerer veldig likt som switchToMainMenu, bare at den setter noen data i editcontrolleren
+   * slik at kategorier allerede er satt idét man bytter vindu
+   */
+  @FXML
+  public void handleEditSelected() {
+    try {
+<span class="fc" id="L188">      FXMLLoader loader = new FXMLLoader(getClass().getResource(&quot;Edit.fxml&quot;));</span>
+<span class="fc" id="L189">      Parent root = loader.load();</span>
+<span class="pc bpc" id="L190" title="2 of 4 branches missed.">      assert root != null;</span>
+<span class="fc" id="L191">      EditController editController = loader.getController();</span>
+<span class="fc" id="L192">      Category category = categoryClient.getCategory(categories.getValue());</span>
+<span class="fc" id="L193">      editController.setCategory(category);</span>
+<span class="fc" id="L194">      editController.afterInitialize();</span>
+<span class="fc" id="L195">      editController.setPrimaryStage(primaryStage);</span>
+<span class="fc" id="L196">      editController.getPrimaryStage().setScene(new Scene(root));</span>
+<span class="fc" id="L197">      editController.getPrimaryStage().show();</span>
+<span class="nc" id="L198">    } catch (IOException | InterruptedException | NullPointerException e) {</span>
+<span class="nc" id="L199">      setFeedback(&quot;Could not switch to the edit menu&quot;, &quot;red&quot;);</span>
+<span class="fc" id="L200">    }</span>
+<span class="fc" id="L201">  }</span>
+
+
+  /**
+   * Denne metoden endrer scene fra CategoryController vinduet,
+   * og tilbake til Mine kategorier vinduet.
+   * Tar i bruk den statiske metoden i app for å hente primaryStage,
+   * og sette det til en ny scene med Main Menu som rot.
+   */
+
+  @FXML
+  public void handleSwitchToMainMenu() {
+    try {
+<span class="nc" id="L214">      FXMLLoader loader = new FXMLLoader(getClass().getResource(&quot;MainMenu.fxml&quot;));</span>
+<span class="nc" id="L215">      Parent root = loader.load();</span>
+<span class="nc" id="L216">      MainMenuController mainMenuController = loader.getController();</span>
+<span class="nc" id="L217">      mainMenuController.setPrimaryStage(primaryStage);</span>
+<span class="nc" id="L218">      mainMenuController.getPrimaryStage().setScene(new Scene(root));</span>
+<span class="nc" id="L219">      mainMenuController.getPrimaryStage().show();</span>
+<span class="nc" id="L220">    } catch (IOException | NullPointerException e) {</span>
+<span class="nc" id="L221">      setFeedback(&quot;Could not switch to main menu&quot;, &quot;red&quot;);</span>
+<span class="nc" id="L222">    }</span>
+<span class="nc" id="L223">  }</span>
+
+  public WebClientCategoryClient getWebClient() {
+<span class="fc" id="L226">    return categoryClient;</span>
+  }
+
+  public void setWebClient(WebClientCategoryClient webClientCategoryClient) {
+<span class="fc" id="L230">    this.categoryClient = webClientCategoryClient;</span>
+<span class="fc" id="L231">  }</span>
+
+  public Category getCategory() {
+<span class="fc" id="L234">    return category;</span>
+  }
+
+  public void setPrimaryStage(Stage primaryStage) {
+<span class="fc" id="L238">    this.primaryStage = primaryStage;</span>
+<span class="fc" id="L239">  }</span>
+
+  public Stage getPrimaryStage() {
+<span class="fc" id="L242">    return primaryStage;</span>
+  }
+
+  /**
+   * Endrer teksten som vises på feedback-labelen.
+   * @param string - det som skal vises på labelen
+   * @param colour - fargen på labelen
+   */
+  @FXML
+  public void setFeedback(String string, String colour) {
+<span class="nc bnc" id="L252" title="All 2 branches missed.">    if (colour.equals(&quot;blue&quot;)) {</span>
+<span class="nc" id="L253">      setBlueColor(feedback);</span>
+<span class="nc bnc" id="L254" title="All 2 branches missed.">    } else if (colour.equals(&quot;red&quot;)) {</span>
+<span class="nc" id="L255">      setRedColor(feedback);</span>
+    }
+<span class="nc" id="L257">    feedback.setText(string);</span>
+<span class="nc" id="L258">  }</span>
+
+  private void setRedColor(Label l) {
+<span class="nc" id="L261">    l.setStyle(&quot;-fx-text-fill: red&quot;);</span>
+<span class="nc" id="L262">  }</span>
+
+  private void setBlueColor(Label l) {
+<span class="nc" id="L265">    l.setStyle(&quot;-fx-text-fill: cornflowerblue&quot;);</span>
+<span class="nc" id="L266">  }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
